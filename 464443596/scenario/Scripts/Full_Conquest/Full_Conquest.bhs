@@ -1,0 +1,35 @@
+//******************** Full_Conquest.bhs ********************//
+
+//When using this script, the player has to capture all cities of the enemy and destroy all military buildings and 
+//units (excluding invisible units like: Scout, Spy and Submarine) to win the game.
+//
+//Version: 1.0
+//Author: https://steamcommunity.com/profiles/76561197989027499/
+
+scenario
+{
+
+labels {
+}
+
+run_once {
+	print_game_msg("Capture all enemy cities and destroy all military buildings and units to win!");   
+	
+	for (n = 1; n <= num_players(); n++)
+	if (is_victory_standard() || is_victory_conquest()){
+		disable_city_defeat(n);
+	}
+}
+
+	for (n = 1; n <= num_players(); n++)
+	if (num_cities(n) < 1 && num_military_buildings(n) < 1) {
+	
+		kill_unit_type(n, "Scout");
+		kill_unit_type(n, "Spy");
+		kill_unit_type(n, "Submarine");
+		
+		if (num_cities(n) < 1 && num_military_buildings(n) < 1 && num_units(n) < 1) {
+			defeat(n);
+		}
+	}
+}

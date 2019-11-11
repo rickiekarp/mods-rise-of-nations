@@ -1,0 +1,13 @@
+//disable airbases and air defense guns for all players
+//Version: 1.0
+//Author: https://steamcommunity.com/profiles/76561197989027499/
+
+scenario {
+  run_once {
+    disable_type("Airbase");
+	disable_type("Air Defense Gun");
+	disable_type("Radar Air Defense");
+	disable_type("SAM Installation");
+    print_game_msg("Airbases and Air Defense Guns have been disabled");
+  }
+}

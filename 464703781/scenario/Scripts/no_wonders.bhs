@@ -1,0 +1,26 @@
+//disable wonders for all players
+//Version: 1.0
+//Author: https://steamcommunity.com/profiles/76561197989027499/
+
+scenario {
+  run_once {
+    disable_type("Pyramids");
+    disable_type("Colossus");
+	disable_type("Hanging Gardens");
+	disable_type("Colosseum");
+	disable_type("Terra Cotta Army");
+	disable_type("Forbidden City");
+	disable_type("Temple of Tikal");
+	disable_type("Porcelain Tower");
+	disable_type("Red Fort");
+	disable_type("Angkor Wat");
+	disable_type("Versailles");
+	disable_type("Statue of Liberty");
+	disable_type("Kremlin");
+	disable_type("Taj Mahal");
+	disable_type("Eiffel Tower");
+	disable_type("Supercollider");
+	disable_type("Space Program");
+    print_game_msg("Wonders have been disabled");
+  }
+}

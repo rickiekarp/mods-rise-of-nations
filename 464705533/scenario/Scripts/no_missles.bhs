@@ -1,0 +1,10 @@
+//disable missle silos for all players
+//Version: 1.0
+//Author: https://steamcommunity.com/profiles/76561197989027499/
+
+scenario {
+  run_once {
+    disable_type("Missile Silo");
+    print_game_msg("Missle Silos have been disabled");
+  }
+}
