@@ -3,33 +3,103 @@
 //When using this script, the player has to capture all cities of the enemy and destroy all military buildings and 
 //units (excluding invisible units like: Scout, Spy and Submarine) to win the game.
 //
-//Version: 1.0
+//Version: 2022.11
 //Author: https://steamcommunity.com/profiles/76561197989027499/
 
 scenario
 {
 
-labels {
-}
+  labels {
+  }
+  
+  // whether city defeat is enabled for each player (1 = enabled, 0 = disabled)
+  static int city_defeat_enabled_player_1 = 1;
+  static int city_defeat_enabled_player_2 = 1;
+  static int city_defeat_enabled_player_3 = 1;
+  static int city_defeat_enabled_player_4 = 1;
+  static int city_defeat_enabled_player_5 = 1;
+  static int city_defeat_enabled_player_6 = 1;
+  static int city_defeat_enabled_player_7 = 1;
+  static int city_defeat_enabled_player_8 = 1;
 
-run_once {
-	print_game_msg("Capture all enemy cities and destroy all military buildings and units to win!");   
-	
-	for (n = 1; n <= num_players(); n++)
-	if (is_victory_standard() || is_victory_conquest()){
-		disable_city_defeat(n);
-	}
-}
+  run_once {
+    print_game_msg("Capture all enemy cities and destroy all military buildings and units to win!");   
+    
+    for (player = 1; player <= num_players(); player++)
+    {
+      if (is_victory_standard() || is_victory_conquest()) {
+        // ignore city defeat for nomads, since nomads start without a city
+        if (get_starting_town_size(player) > 0) {
+          disable_city_defeat(player);
+        }
+      }
+    }
+  }
 
-	for (n = 1; n <= num_players(); n++)
-	if (num_cities(n) < 1 && num_military_buildings(n) < 1) {
-	
-		kill_unit_type(n, "Scout");
-		kill_unit_type(n, "Spy");
-		kill_unit_type(n, "Submarine");
-		
-		if (num_cities(n) < 1 && num_military_buildings(n) < 1 && num_units(n) < 1) {
-			defeat(n);
-		}
-	}
+  for (player = 1; player <= num_players(); player++)
+  {
+  
+    // disable city defeat for nomads once the player has a city
+    switch(player) {
+      case 1:
+        if (city_defeat_enabled_player_1 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_1 = 0;
+        }
+        break;
+      case 2:
+        if (city_defeat_enabled_player_2 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_2 = 0;
+        }
+        break;
+      case 3:
+        if (city_defeat_enabled_player_3 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_3 = 0;
+        }
+        break;
+      case 4:
+        if (city_defeat_enabled_player_4 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_4 = 0;
+        }
+        break;
+      case 5:
+        if (city_defeat_enabled_player_5 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_5 = 0;
+        }
+        break;
+      case 6:
+        if (city_defeat_enabled_player_6 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_6 = 0;
+        }
+        break;
+      case 7:
+        if (city_defeat_enabled_player_7 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_7 = 0;
+        }
+        break;
+      case 8:
+        if (city_defeat_enabled_player_8 == 1 && get_starting_town_size(player) == 0 && num_cities(player) > 0) {
+          disable_city_defeat(player); 
+          city_defeat_enabled_player_8 = 0;
+        }
+        break;        
+    }
+
+    if (num_cities(player) < 1 && num_military_buildings(player) < 1) {
+    
+      kill_unit_type(player, "Scout");
+      kill_unit_type(player, "Spy");
+      kill_unit_type(player, "Submarine");
+      
+      if (num_cities(player) < 1 && num_military_buildings(player) < 1 && num_units(player) < 1) {
+        defeat(player);
+      }
+    }
+  }
 }
